@@ -1,0 +1,138 @@
+/* General/shared styles for all pages */
+body {
+    background-color: #FAF9F6;
+    color: #0d1b2a;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+}
+
+h1 {
+    color: #0d1b2a;
+    font-size: 48px;
+    margin: 0.5em 0 0.5em 0;
+    text-align: center;
+}
+
+header h1 {
+    background-color: #afdcec;
+    border-radius: 10px;
+    border: 5px solid #0d1b2a;
+    margin: 40px auto 40px auto;
+    padding: 10px 0;
+    max-width: 1000px;
+    font-size: 48px;
+    display: block;
+}
+
+.member-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.member {
+    text-align: center;
+    border-radius: 5px;
+    border: 2.5px solid #0d1b2a;
+    padding: 5px;
+}
+
+.image-box {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #999;
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 2%;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9em;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+#successMessage, #errorMessage {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.error {
+    color: #f44336;
+    font-size: 0.9rem;
+}
+
+button, input[type="submit"], input[type="reset"] {
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: 2px solid #0d1b2a;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+button[type="submit"], input[type="submit"] {
+    background-color: #4361ee;
+    color: #FAF9F6;
+}
+button[type="submit"]:hover, input[type="submit"]:hover {
+    background-color: #3251ee;
+}
+button[type="reset"], input[type="reset"] {
+    background-color: #6c757d;
+    color: #FAF9F6;
+}
+button[type="reset"]:hover, input[type="reset"]:hover {
+    background-color: #5c636a;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.left-section, .right-section {
+    flex: 1;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    margin: 5px;
+    align-items: center;
+}

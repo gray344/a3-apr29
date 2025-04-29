@@ -1,0 +1,189 @@
+
+/* General styles */
+body {
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1.6;
+    margin: 0;
+    padding-bottom: 1000px;
+    color: #0d1b2a;
+    background-color: #FAF9F6;
+    text-align: center;
+  }
+
+  .main {
+    margin: 0 auto; /* Centers the text section horizontally */
+    text-align: center; /* Aligns text within the section */
+    max-width: 900px; /* Limits the width of the text section */
+    word-wrap: break-word; /* Prevents text overflow */
+    overflow-wrap: break-word; /* Ensures word breaks for longer words */
+    font-size: 16px; /* Adjust font size as needed */
+    line-height: 1.5; /* Adds spacing between lines */
+    padding: 10px; /* Adds some padding for better aesthetics */
+    position: relative; /* Allows us to adjust the position */
+    top: -50px; /* Moves the element up by 50 pixels */
+
+
+/* divider style */
+hr.rounded {
+    border-top: 3px solid #0d1b2a;
+    border-radius: 5px;
+  }
+/* Header styles */
+header {
+    background: #ee5e5e;
+    color: #FAF9F6;
+    padding: 1rem 2rem;
+    border-radius: 15px; /* Rounded corners for the "island" effect */
+    max-width: 1000px; /* Set a maximum width for the header */
+    margin: 2rem auto; /* Center the header horizontally */
+    border-style: solid; /* Add a border */
+    border-width: 5px; /* Set the border width */
+    border-radius: 10px; /* Rounded corners for the navigation links */
+    border-color: #0d1b2a; /* Set the border color */
+    box-shadow: 4px 4px #0d1b2a; /* Make the shadow*/
+    
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* Space between name and navigation */
+    align-items: center; /* Center items vertically */
+}
+
+header h1, h2{
+    margin: 0;
+    font-family: 'Lexend Deca', serif;
+    font-weight: 700;
+}
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+nav a {
+    color: #FAF9F6;
+    text-decoration: none;
+    align-content: center;
+    padding: 0.5rem 1rem;
+    border-style: solid;
+    border-color: #0d1b2a;
+    border-radius: 10px; /* Rounded corners for the navigation links */
+    box-shadow: 4px 4px #0d1b2a; /* Make the shadow*/
+    background-color: #ee5e5e; /* Background color for the buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    display: flex;
+    justify-content: center; /* Aligns text in the middle horizontally */
+    align-items: center; /* Aligns text in the middle vertically */
+}
+
+nav a:hover {
+    background-color: #1b263b; /* Change background color on hover */
+    border-style: solid;
+    border-color: #0d1b2a;
+    transform: matrix(1, 0, 0, 1, 0, 0); /* Add a subtle lift on hover */
+    border-radius: 10px; /* Rounded corners for the navigation links */
+}
+
+a{
+    text-decoration: none; /* Removes underline from links */
+    color: #ee5e5e; /* Offwhite color */
+}
+a:hover {
+    color: #FAF9F6; /* Changes color on hover */
+}
+
+.resume-container {
+    border: 1px solid #0d1b2a; /* Adds a subtle border */
+    border-radius: 5px; /* Rounds the edges */
+    overflow: hidden; /* Ensures no overflow from iframe */
+    margin: 20px 0; /* Adds some spacing around the resume */
+}
+
+
+.social-link {
+    list-style: none; /* Removes default list styling */
+    text-decoration: none; /* Removes underline */
+    color: #0d1b2a; /* Text color */
+    padding: 10px 15px; /* Padding for a button-like look */
+    border-radius: 5px; /* Rounded edges */
+    align-items: center; /* Aligns items vertically */
+    align-content: center; /* Aligns items horizontally */
+    font-size: 16px; /* Adjusts text size */
+    max-width: fit-content; /* Adjusts width to fit content */
+    margin: 0 auto; /* Centers the buttons horizontally */
+    display: block; /* Displays links as block elements */
+    font-weight: bold; /* Makes the text bold */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.social-link:hover {
+    background-color: #ee5e5e; /* Changes background color on hover */
+}
+/* Section styles */
+section {
+    padding: 2rem;
+    margin: 1rem;
+    }
+
+section h2 {
+    text-align: center;
+    font-family: 'Lexend Deca', serif;
+    font-weight: 700;
+}
+  
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background: #FAF9F6;
+    color: #0d1b2a;
+}
+
+
+/* Lexend Deca Bold Class */
+.lexend-deca-bold {
+    font-family: "Lexend Deca", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.form-container {
+    width: 300px;
+    margin: 100px auto; /* centers horizontally with some top spacing */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.form-container input,
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-container button {
+    background-color: #6364b1;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
+
