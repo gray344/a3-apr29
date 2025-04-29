@@ -314,99 +314,80 @@ async function updateComplaint(id) {
 }
 
 async function handleCustomerUpdate() {
-    if (!currentCustomer) return showError('No customer data loaded to update.');
+  if (!currentCustomer) return alert('No customer data loaded to update.');
 
-    // Create FormData from the form
-    const formElement = document.getElementById('customerForm');
-    const formData = new FormData(formElement);
+  const formElement = document.getElementById('customerForm');
+  const formData = new FormData(formElement);
 
-    // Manually add fields that might be needed by the API but aren't direct inputs
-    formData.append('person_id', currentCustomer.PersonID);
-    formData.append('customer_type', currentCustomer.CustomerType); // Send type back
+  // Add necessary fields
+  formData.append('person_id', currentCustomer.PersonID);
+  formData.append('customer_type', currentCustomer.CustomerType);
 
-    // Add company details if applicable
-    if (currentCustomer.CustomerType === 'Company') {
-        formData.append('company_name', document.getElementById('companyName').value);
-        formData.append('tax_id', document.getElementById('taxId').value);
+  // Parse full name
+  const fullName = document.getElementById('customerName').value.trim();
+  const nameParts = fullName.split(' ');
+  const firstName = nameParts.shift() || '';
+  const lastName = nameParts.join(' ') || '';
+  formData.append('first_name', firstName);
+  formData.append('last_name', lastName);
+
+  formData.append('email', document.getElementById('customerEmail').value);
+  formData.append('phone_number', document.getElementById('customerPhone').value);
+  formData.append('street_address', document.getElementById('customerStreet').value);
+  formData.append('city', document.getElementById('customerCity').value);
+  formData.append('state', document.getElementById('customerState').value);
+  formData.append('zip_code', document.getElementById('customerZip').value);
+
+  if (currentCustomer.CustomerType === 'Company') {
+      formData.append('company_name', document.getElementById('companyName').value);
+      formData.append('tax_id', document.getElementById('taxId').value);
+  }
+
+  // Send the update to your backend (mock or real)
+  try {
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
     }
-    
-    // Add full name (split from the single input) - Assuming API expects separate names
-    const fullName = document.getElementById('customerName').value.trim();
-    const nameParts = fullName.split(' ');
-    const firstName = nameParts.shift() || '';
-    const lastName = nameParts.join(' ') || '';
-    formData.append('first_name', firstName); // Adjust API expectation if needed
-    formData.append('last_name', lastName);   // Adjust API expectation if needed
-    formData.append('email', document.getElementById('customerEmail').value);
-    formData.append('phone_number', document.getElementById('customerPhone').value);
-    formData.append('street_address', document.getElementById('customerStreet').value);
-    formData.append('city', document.getElementById('customerCity').value);
-    formData.append('state', document.getElementById('customerState').value);
-    formData.append('zip_code', document.getElementById('customerZip').value);
 
+      const response = await fetch('customer_api.php?action=update', {
+          method: 'POST',
+          body: formData,
+      });
 
-    try {
-        showLoading();
-        // Use POST with FormData for customer_api.php update action
-        const response = await fetch('customer_api.php?action=update', {
-            method: 'POST',
-            body: formData // Send FormData directly
-        });
-        const data = await response.json();
+      if (!response.ok) throw new Error('Failed to update customer.');
 
-        if (data.success) {
-            showSuccess('Customer information updated successfully');
-            // Update local currentCustomer with the potentially modified data returned
-            // Assuming the API returns the updated customer object in data.data
-            currentCustomer = data.data || currentCustomer; // Fallback to old data if API doesn't return updated
-            cancelEdit(); // Reset form to view mode with updated data
-            displayCustomerInfo(currentCustomer); // Explicitly refresh display
-        } else {
-            showError(data.error || 'Error updating customer');
-        }
-    } catch (error) {
-        showError('Network or server error updating customer');
-        console.error('Update Customer Error:', error);
-    } finally {
-        hideLoading();
-    }
+      const result = await response.json();
+      alert('Customer updated successfully.');
+
+      // Optionally refresh data
+      cancelEdit(); // exit edit mode
+  } catch (err) {
+      console.error(err);
+      alert('An error occurred while updating.');
+  }
 }
 
 // Add this function to your salesman_functions.js file
 function cancelEdit() {
-  // Hide all editable elements
-  const editableElements = document.querySelectorAll('.customer-info-editable');
-  editableElements.forEach(el => {
-      el.style.display = 'none';
-  });
-  
-  // Show all read-only elements
-  const readOnlyElements = document.querySelectorAll('.customer-info-readonly');
-  readOnlyElements.forEach(el => {
-      el.style.display = 'block';
-  });
-  
-  // Hide the save button
-  document.getElementById('saveCustomerBtn').style.display = 'none';
-  
-  // Reset form values to match the current customer data
+  document.querySelectorAll('.customer-field').forEach(field => field.disabled = true);
+  document.getElementById('saveSection').style.display = 'none';
+  document.getElementById('editCustomerBtn').style.display = 'inline-block';
+
   if (currentCustomer) {
-    document.getElementById('customerName').value = `${currentCustomer.FirstName || ''} ${currentCustomer.LastName || ''}`.trim();
-    document.getElementById('customerEmail').value = currentCustomer.Email || '';
-    document.getElementById('customerPhone').value = currentCustomer.Phone || '';
-    document.getElementById('customerStreet').value = currentCustomer.StreetAddress || '';
-    document.getElementById('customerCity').value = currentCustomer.City || '';
-    document.getElementById('customerState').value = currentCustomer.State || '';
-    document.getElementById('customerZip').value = currentCustomer.ZipCode || '';    
+      document.getElementById('customerName').value = `${currentCustomer.FirstName || ''} ${currentCustomer.LastName || ''}`.trim();
+      document.getElementById('customerEmail').value = currentCustomer.Email || '';
+      document.getElementById('customerPhone').value = currentCustomer.Phone || '';
+      document.getElementById('customerStreet').value = currentCustomer.StreetAddress || '';
+      document.getElementById('customerCity').value = currentCustomer.City || '';
+      document.getElementById('customerState').value = currentCustomer.State || '';
+      document.getElementById('customerZip').value = currentCustomer.ZipCode || '';
   }
 }
 
 function enableCustomerEdit() {
-  const fields = document.querySelectorAll('.customer-field');
-  fields.forEach(field => field.disabled = false);
-
-  // Show the save/cancel buttons
+  document.querySelectorAll('.customer-field').forEach(field => field.disabled = false);
   document.getElementById('saveSection').style.display = 'block';
+  document.getElementById('editCustomerBtn').style.display = 'none';
 }
 
 
@@ -756,24 +737,13 @@ function initializeDashboard() {
         console.warn('Order search button not found.');
     }
 
-
     // Customer Edit Form (New)
     document.getElementById('customerForm').addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent default form submission
         handleCustomerUpdate();
     });
     document.getElementById('editCustomerBtn').addEventListener('click', enableCustomerEdit);
-    // Find the cancel button within the saveSection and attach listener
-    const cancelBtn = document.querySelector('#saveSection button[onclick="cancelEdit()"]');
-     if (cancelBtn) {
-         cancelBtn.onclick = cancelEdit; // Keep existing or use addEventListener
-     } else {
-         // If the button was dynamically added or structure changed, find differently
-         const cancelBtnAlt = document.querySelector('#saveSection button.btn-secondary');
-         if (cancelBtnAlt) cancelBtnAlt.addEventListener('click', cancelEdit);
-         else console.warn('Cancel edit button not found.');
-     }
-
+    document.getElementById('cancelEditBtn').addEventListener('click', cancelEdit);
 
     // "Create New" Form Type Selector
     document.getElementById('action_type').addEventListener('change', toggleCreateFields);
